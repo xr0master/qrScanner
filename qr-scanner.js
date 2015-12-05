@@ -113,7 +113,8 @@ qrScanner = new function() {
 					"width": options.width,
 					"height": options.width,
 					"facingMode": "environment",
-					"optional": camera }
+					"optional": camera
+				},
 				"audio": false
 			}).then(successCallback).catch(errorCallback);
 		}
