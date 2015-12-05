@@ -1,4 +1,4 @@
-qrScanner = new function() {
+Meteor.qrScanner = new function() {
 	
 	var context = null;
 	var video = null;
@@ -52,6 +52,7 @@ qrScanner = new function() {
 	
 	var errorCallback = function(error) {
 		console.error('An error occurred: [CODE ' + error.code + ']');
+		console.log(error);
 	}
 	
 	var successCallback = function(stream) {
@@ -71,7 +72,7 @@ qrScanner = new function() {
 		context.drawImage(video, 0, 0, options.width, options.height);
 		try {
 			var result = qrcode.decode({"canvas":context.canvas});
-			qrScanner.stop();
+			Meteor.qrScanner.stop();
 			options.done(result);
 		} catch(error) {
 			options.fail(error);
@@ -109,11 +110,14 @@ qrScanner = new function() {
 	this.scan = function() {
 		if (isReady) {
 			navigator.mediaDevices.getUserMedia({
-				"video":  {
-					"width": options.width,
-					"height": options.width,
-					"facingMode": "environment",
-					"optional": camera
+				"video": {
+					"mandatory": {
+						"maxWidth": options.width,
+						"maxHeight": options.height,
+					},
+					"optional": [{
+						"sourceId": camera
+					}]
 				},
 				"audio": false
 			}).then(successCallback).catch(errorCallback);
@@ -132,9 +136,9 @@ qrScanner = new function() {
 }
 
 Template.qrScanner.rendered = function() {
-	qrScanner.init();
+	Meteor.qrScanner.init();
 }
 
 Template.qrScanner.destroyed = function() {
-	qrScanner.stop();
+	Meteor.qrScanner.stop();
 }
