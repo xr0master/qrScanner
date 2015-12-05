@@ -40,7 +40,7 @@ Meteor.qrScanner.scan();
 ## Example
 
 ```
-Meteor.isClient) {
+if (Meteor.isClient) {
 	Meteor.startup(function() {
 		Meteor.qrScanner.init({
 			"width": 1280,
