@@ -8,6 +8,10 @@ Package.on_use(function (api) {
 
   api.versionsFrom('METEOR@1.2.1')
 
+  api.use([
+    'templating',
+  ],'client')
+
   api.add_files([
     'lib/jsqrcode/grid.js',
     'lib/jsqrcode/version.js',
@@ -26,9 +30,8 @@ Package.on_use(function (api) {
     'lib/jsqrcode/findpat.js',
     'lib/jsqrcode/alignpat.js',
     'lib/jsqrcode/databr.js',
+	'qr-scanner.html',
     'qr-scanner.js'
   ], 'client')
-  
-  api.addAssets(['qr-scanner.html'], 'client')
 
 })
