@@ -5,10 +5,11 @@ Meteor.qrScanner = new function() {
 	var intervalID = null;
 	var isReady = false;
 	var camera = null;
+	var videoStream = null;
 	
 	var options = {
-		"width": 720,
-		"height": 1280,
+		"width": 1280,
+		"height": 720,
 		"done": function(result) {
 			console.log(result);
 		},
@@ -61,6 +62,7 @@ Meteor.qrScanner = new function() {
 		} else {
 			video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
 		}
+		videoStream = stream;
 		video.onloadedmetadata = function() {
 			video.play();
 		}
@@ -132,6 +134,13 @@ Meteor.qrScanner = new function() {
 		} else {
 			video.src = null;
 		}
+		if (videoStream) {
+			var tracks = videoStream.getTracks();
+			for (var i = 0; i < tracks.length; ++i) {
+				tracks[i].stop();
+			}
+		}
+		context.clearRect(0, 0, options.width, options.height);
 	}
 }
 
