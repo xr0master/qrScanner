@@ -1,6 +1,6 @@
 Package.describe({
   name:'commerse:qr-scanner',
-  version:'0.1',
+  version:'1.0.0',
   summary: 'A QR Code Scanner (using jsqrcode)'
 });
 
