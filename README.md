@@ -37,6 +37,12 @@ Enable QR Code scanner
 Meteor.qrScanner.scan();
 ```
 
+Disable QR Code scanner
+
+```
+Meteor.qrScanner.stop();
+```
+
 ## Example
 
 ```
